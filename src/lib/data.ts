@@ -26,14 +26,6 @@ export const languagesFilters = [
   },
   {
     id: 0,
-    name: "Javascript",
-  },
-  {
-    id: 0,
-    name: "Rust",
-  },
-  {
-    id: 0,
-    name: "Python",
+    name: "Solidity",
   },
 ];
