@@ -27,6 +27,7 @@ module.exports = {
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
+          rosesoft: "#f5e3d9",
         },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
