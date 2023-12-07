@@ -1,4 +1,5 @@
 import { courses, languagesFilters } from "@/lib/data";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -24,8 +25,9 @@ export default function Home() {
           <div className="flex flex-wrap gap-5">
             {courses.map((item, key) => {
               return (
-                <div
+                <Link
                   key={key}
+                  href={`/courses/${item.slug}`}
                   className="border border-slate-300 rounded-md overflow-hidden flex flex-col max-w-[250px] w-full"
                 >
                   <div className="flex h-[150px] bg-orange-300 font-bold justify-center items-center">
@@ -44,7 +46,7 @@ export default function Home() {
                     </div>
                     <p className="text-sm">{item.level}</p>
                   </div>
-                </div>
+                </Link>
               );
             })}
           </div>
