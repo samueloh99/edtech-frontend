@@ -1,7 +1,6 @@
-import { Dialog, DialogContent } from "@/components/ui/dialog";
-import { PostCairoCodeSubmissionType } from "@/lib/types";
-import { DialogTrigger, DialogClose } from "@radix-ui/react-dialog";
 import Link from "next/link";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { DialogTrigger, DialogClose } from "@radix-ui/react-dialog";
 
 interface NextStepDialogProps {
   isDialogOpen: boolean;
@@ -16,6 +15,7 @@ interface NextStepDialogProps {
   curentModuleNumber: number;
   setIsDialogOpen: (b: boolean) => void;
   textContent: string;
+  language: string;
 }
 
 export function NextStepDialog({
@@ -25,6 +25,7 @@ export function NextStepDialog({
   curentModuleNumber,
   setIsDialogOpen,
   textContent,
+  language,
 }: NextStepDialogProps) {
   return (
     <Dialog open={isDialogOpen}>
@@ -35,12 +36,17 @@ export function NextStepDialog({
           <p className="text-sm">{textContent}</p>
         </div>
         {nextModuleContent === null ? (
-          <button>finish course</button>
+          <Link
+            className="bg-green-600 hover:bg-green-700 transition-all flex flex-row gap-2 items-center justify-center text-white w-auto h-[30px] px-2 rounded-md"
+            href={`/`}
+          >
+            Finish Course
+          </Link>
         ) : nextModuleContent.type === "content" ? (
           <Link
             onClick={() => handleMarkAsComplete(curentModuleNumber)}
             className="bg-green-600 hover:bg-green-700 transition-all flex flex-row gap-2 items-center justify-center text-white w-auto h-[30px] px-2 rounded-md"
-            href={`/learn/cairo/content/module/${curentModuleNumber + 1}`}
+            href={`/learn/${language}/content/module/${curentModuleNumber + 1}`}
           >
             <p className="text-xs text-slate-200">Next:</p>
             <p className="text-xs">{nextModuleContent.title}</p>
@@ -49,7 +55,9 @@ export function NextStepDialog({
           <Link
             onClick={() => handleMarkAsComplete(curentModuleNumber)}
             className="bg-green-600 hover:bg-green-700 transition-all flex flex-row gap-2 items-center justify-center text-white w-auto h-[30px] px-2 rounded-md"
-            href={`/learn/cairo/exercise/module/${curentModuleNumber + 1}`}
+            href={`/learn/${language}/exercise/module/${
+              curentModuleNumber + 1
+            }`}
           >
             <p className="text-xs text-slate-200">Next:</p>
             <p className="text-xs">{nextModuleContent.title}</p>

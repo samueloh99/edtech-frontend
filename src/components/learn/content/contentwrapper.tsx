@@ -102,6 +102,7 @@ export default function ContentWrapper({
         nextModuleContent={nextModuleContent}
         setIsDialogOpen={setIsDialogOpen}
         textContent={"You completed your first exercise!"}
+        language="cairo"
       />
       <h1 className="text-lg font-bold">{courseContent.title}</h1>
       <div className="flex w-full relative">

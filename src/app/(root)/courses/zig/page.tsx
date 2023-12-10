@@ -6,20 +6,18 @@ import {
 } from "@/components/ui/accordion";
 import { Badge } from "@/components/ui/badge";
 
-import { Button } from "@/components/ui/button";
-
-import { solidityCourseContent } from "@/lib/data";
+import { zigCourseContent } from "@/lib/data";
 import { Play } from "lucide-react";
 import Link from "next/link";
 
-export default function Solidity() {
+export default function Zig() {
   return (
     <main className="flex flex-col">
       <div className="flex flex-col gap-5 relative">
         <div className="flex h-full py-20 justify-center items-center bg-green-100">
           <div className="main-container flex flex-col md:flex-row gap-20 md:gap-0">
             <div className="flex flex-col w-full md:w-3/5 mr-auto justify-center items-end gap-10 text-end">
-              <h1 className="text-5xl font-semibold">Solidity Course</h1>
+              <h1 className="text-5xl font-semibold">Zig Course</h1>
               <div className="flex flex-col gap-5 text-end items-end justify-center">
                 <p className="text-lg">
                   with <span className="font-bold ">Falco</span>
@@ -27,26 +25,31 @@ export default function Solidity() {
                 <p className="text-lg">Course level: Beginner</p>
               </div>
               <p className="text-base">
-                Dive into the world of Smart Contract Development with Solidity,
-                a key programming language for creating decentralized
-                applications on the Ethereum blockchain. Build and deploy
-                secure, efficient contracts by mastering Solidity, along with
-                essential tools and frameworks. This course covers Smart
-                Contract logic, Ethereum Virtual Machine basics, and best
-                practices for gas optimization and security.
+                Embark on a journey to master Zig, an emerging programming
+                language designed for robustness, optimality, and clarity. This
+                course introduces you to the fundamentals of Zig, from its
+                unique approach to error handling and resource management to its
+                powerful compile-time features. You'll learn how to write
+                efficient, maintainable code for a variety of applications,
+                including system programming and cross-platform development.
+                Discover the efficiency of Zig's comptime capabilities, and gain
+                practical experience by tackling real-world coding challenges.
+                By the end of the course, you'll have a solid foundation in Zig
+                and be ready to leverage its features for optimal performance
+                and reliability in your projects.
               </p>
               <div className="w-full flex flex-col gap-5">
                 <p className="text-lg">Skills you'll obatin</p>
                 <div className="w-full flex flex-wrap gap-2 justify-end items-center ">
-                  <Badge>Solidity</Badge>
-                  <Badge>Javascript</Badge>
-                  <Badge>Smart Contracts</Badge>
+                  <Badge>Zig Language</Badge>
+                  <Badge>System Programming</Badge>
+                  <Badge>Compile-time Techniques</Badge>
                 </div>
               </div>
             </div>
             <div className="flex flex-col w-full md:w-2/5 justify-center items-center gap-5">
               <Link
-                href={"/learn/solidity/intro"}
+                href={"/learn/zig/content"}
                 className="bg-black text-white rounded-md w-[150px] py-6 text-center hover:bg-slate-900 duration-150"
               >
                 Get started
@@ -67,7 +70,12 @@ export default function Solidity() {
                 <h1 className="font-bold text-xl">What you will learn</h1>
                 <p className="text-base">This course have 40 lessons</p>
               </div>
-              <Button className="font-bold">Get Started</Button>
+              <Link
+                href={"/learn/zig/content"}
+                className="bg-black text-white rounded-md w-[150px] py-6 text-center hover:bg-slate-900 duration-150"
+              >
+                Get started
+              </Link>
             </div>
 
             <div className="flex flex-col">
@@ -76,7 +84,7 @@ export default function Solidity() {
                 collapsible
                 className="gap-5 flex flex-col"
               >
-                {solidityCourseContent.map((item, key) => {
+                {zigCourseContent.map((item, key) => {
                   return (
                     <AccordionItem value={`chapter-${item.chapter}`} key={key}>
                       <AccordionTrigger className=" flex flex-row justify-between">
@@ -93,7 +101,7 @@ export default function Solidity() {
                           {item.contents.map((content) => {
                             return (
                               <Link
-                                href={"/"}
+                                href={"/learn/zig/content"}
                                 key={content.id}
                                 className="flex flex-row justify-between items-center px-2 py-4"
                               >

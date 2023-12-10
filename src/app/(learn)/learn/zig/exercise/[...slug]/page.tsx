@@ -9,12 +9,12 @@ import confetti from "canvas-confetti";
 import Editor, { OnChange } from "@monaco-editor/react";
 
 import {
-  UserCourseProgressProvider,
-  useUserCourseProgressContext,
-} from "@/context/UserCourseProgressContext";
+  UserZigCourseProgressProvider,
+  useUserZigCourseProgressContext,
+} from "@/context/UserZigCourseProgressContent";
 
-import { cairoCourseContent, cairoExercises } from "@/lib/data";
-import { postCairoCodeSubmission } from "@/lib/postCairoCode";
+import { zigCourseContent, zigExercises } from "@/lib/data";
+import { postZigCodeSubmission } from "@/lib/postZigCode";
 import { PostCodeSubmissionType } from "@/lib/types";
 import { Spinner } from "@/components/spinner";
 import { ResetCodeDialog } from "@/components/learn/exercise/resetCodeDialog";
@@ -29,11 +29,11 @@ interface FileStructure {
   };
 }
 
-export default function CairoIntroWrapper() {
+export default function ZigIntroWrapper() {
   return (
-    <UserCourseProgressProvider>
-      <CairoIntro />
-    </UserCourseProgressProvider>
+    <UserZigCourseProgressProvider>
+      <ZigIntro />
+    </UserZigCourseProgressProvider>
   );
 }
 
@@ -50,22 +50,23 @@ const useFiles = (initialFiles: FileStructure) => {
   return { files, updateFile };
 };
 
-function CairoIntro() {
+function ZigIntro() {
   const router = useRouter();
   const pathName = usePathname();
-  const { markModuleComplete, progress } = useUserCourseProgressContext();
+  const { markModuleComplete, areAllModulesCompleted } =
+    useUserZigCourseProgressContext();
 
   const findCurrentModuleNumber = pathName.split("/").slice(1);
   const curentModuleNumber = Number(
     findCurrentModuleNumber[findCurrentModuleNumber.length - 1]
   );
 
-  const findExercise = cairoExercises.find(
+  const findExercise = zigExercises.find(
     (exercise) => exercise.module === curentModuleNumber
   );
 
   const findNextModuleContent = (currentModuleNumber: number) => {
-    const allContents = cairoCourseContent.flatMap((item) => item.contents);
+    const allContents = zigCourseContent.flatMap((item) => item.contents);
     const currentIndex = allContents.findIndex(
       (content) => content.module === currentModuleNumber
     );
@@ -78,7 +79,7 @@ function CairoIntro() {
 
   useEffect(() => {
     if (findExercise === undefined) {
-      router.replace("/learn/cairo/content");
+      router.replace("/learn/zig/content");
     }
   }, [findExercise, router]);
 
@@ -86,7 +87,7 @@ function CairoIntro() {
     return null;
   }
 
-  const [fileName, setFileName] = useState<string>("lib.cairo");
+  const [fileName, setFileName] = useState<string>("index.zig");
   const { files, updateFile } = useFiles(findExercise.file);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
@@ -103,8 +104,8 @@ function CairoIntro() {
   const handleRun = async () => {
     try {
       setLoadingRunCode(true);
-      const response = await postCairoCodeSubmission(
-        files["lib.cairo"].value,
+      const response = await postZigCodeSubmission(
+        files["index.zig"].value,
         findExercise.exerciseId
       );
       setLoadingRunCode(false);
@@ -121,7 +122,7 @@ function CairoIntro() {
   };
 
   const handleResetCode = () => {
-    const initialCode = findExercise.file["lib.cairo"].value;
+    const initialCode = findExercise.file["index.zig"].value;
     updateFile(fileName, initialCode);
   };
 
@@ -156,7 +157,7 @@ function CairoIntro() {
         nextModuleContent={nextModuleContent}
         setIsDialogOpen={setIsDialogOpen}
         textContent="You completed your exercise !"
-        language="cairo"
+        language={"zig"}
       />
       <div className="bg-slate-900 text-white flex flex-col justify-start gap-2 items-start max-w-[200px] w-full h-full py-5">
         <p className="text-sm text-slate-300 ml-5">Explorer</p>
@@ -208,16 +209,22 @@ function CairoIntro() {
                 {loadingRunCode && <Spinner />}
               </Button>{" "}
               <ResetCodeDialog handleResetCode={handleResetCode} />
-              {nextModuleContent === null ? (
-                <button>finish course</button>
-              ) : codeResultConsole && codeResultConsole?.success === true ? (
+              {areAllModulesCompleted && nextModuleContent === null && (
+                <Link
+                  className="bg-green-600 hover:bg-green-700 transition-all flex flex-row gap-2 items-center justify-center text-white px-2 py-3 rounded-md"
+                  href={`/`}
+                >
+                  Finish course
+                </Link>
+              )}
+              {nextModuleContent !== null &&
+              codeResultConsole &&
+              codeResultConsole.success === true ? (
                 nextModuleContent.type === "content" ? (
                   <Link
                     onClick={() => handleMarkAsComplete(curentModuleNumber)}
                     className="bg-green-600 hover:bg-green-700 transition-all flex flex-row gap-2 items-center justify-center text-white w-auto h-[30px] px-2 rounded-md"
-                    href={`/learn/cairo/content/module/${
-                      curentModuleNumber + 1
-                    }`}
+                    href={`/learn/zig/content/module/${curentModuleNumber + 1}`}
                   >
                     <p className="text-xs text-slate-200">Next:</p>
                     <p className="text-xs">{nextModuleContent.title}</p>
@@ -226,7 +233,7 @@ function CairoIntro() {
                   <Link
                     onClick={() => handleMarkAsComplete(curentModuleNumber)}
                     className="bg-green-600 hover:bg-green-700 transition-all flex flex-row gap-2 items-center justify-center text-white w-auto h-[30px] px-2 rounded-md"
-                    href={`/learn/cairo/exercise/module/${
+                    href={`/learn/zig/exercise/module/${
                       curentModuleNumber + 1
                     }`}
                   >

@@ -9,6 +9,16 @@ export const courses = [
     level: "Beginner",
     bg: "bg-gradient-to-bl from-fuchsia-200 to-orange-300",
   },
+  {
+    id: 1,
+    name: "Zig Course",
+    slug: "zig",
+    lessons: 140,
+    totalHours: 50,
+    author: "Falco",
+    level: "Beginner",
+    bg: "bg-gradient-to-br from-amber-300 to-lime-200",
+  },
   // {
   //   id: 0,
   //   name: "Solidity Course",
@@ -25,6 +35,10 @@ export const languagesFilters = [
   {
     id: 0,
     name: "Cairo",
+  },
+  {
+    id: 1,
+    name: "Zig",
   },
   // {
   //   id: 0,
@@ -200,6 +214,29 @@ export const cairoCourseContent = [
   },
 ];
 
+export const zigCourseContent = [
+  {
+    chapter: 1,
+    title: "Basics",
+    contents: [
+      {
+        id: 0,
+        title: "Hello World Exercise",
+        module: 1,
+        type: "pratice",
+        time: "00:00",
+      },
+      {
+        id: 1,
+        title: "Data Types Exercise",
+        module: 2,
+        type: "pratice",
+        time: "00:00",
+      },
+    ],
+  },
+];
+
 export const cairoExercises = [
   {
     module: 5,
@@ -223,6 +260,34 @@ export const cairoExercises = [
         language: "cairo",
         value:
           "// Exercise 2: take the elements representing food from the 'random_elements' tuple and store them in a new tuple variable called 'food'.\nfn exercise_two() -> (felt252, felt252) {\n    let random_elements = (100, 'sushi', 1, true, 'pizza', 'computer');\n    // Write your code below this line. Don't modify the code above this line.\n    let (rand1, rand2, rand3, rand4, rand5, rand6) = random_elements;\n    let food = (rand2, rand5);\n    // Don't modify the code below this line.\n    food\n}",
+      },
+    },
+  },
+];
+
+export const zigExercises = [
+  {
+    module: 1,
+    exerciseId: 1,
+    file: {
+      "index.zig": {
+        name: "index.zig",
+        language: "zig",
+        value:
+          "// EXERCISE 1 \n// Create a public hello world function that prints 'Hello, world!' to the console using the provided writer.\n\nconst std = @import('std');\n\npub fn printHelloWorld(writer: anytype) !void {}",
+      },
+    },
+  },
+
+  {
+    module: 2,
+    exerciseId: 2,
+    file: {
+      "index.zig": {
+        name: "index.zig",
+        language: "zig",
+        value:
+          "// EXERCISE 2\n// Create a public function `addOne` that takes an `i32` and returns an `i32` that is one larger.\n\nconst std = @import('std');\n\npub fn addOne() {}",
       },
     },
   },
