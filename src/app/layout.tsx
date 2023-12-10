@@ -2,10 +2,8 @@ import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import { cn } from "@/lib/utils";
 import "./globals.css";
-import { Header } from "@/components/header";
-import { Footer } from "@/components/footer";
 
-export const fontsPoppins = Poppins({
+const fontsPoppins = Poppins({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800"],
   style: "normal",
   subsets: ["latin"],

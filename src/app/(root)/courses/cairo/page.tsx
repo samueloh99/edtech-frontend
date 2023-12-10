@@ -9,10 +9,12 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
 import { cairoCourseContent } from "@/lib/data";
+import { sumTime } from "@/lib/utils";
 import { Play } from "lucide-react";
 import Link from "next/link";
 
 export default function Cairo() {
+  const totalCourse = sumTime(cairoCourseContent[0].contents);
   return (
     <main className="flex flex-col">
       <div className="flex flex-col gap-5 relative">
@@ -57,7 +59,7 @@ export default function Cairo() {
             </div>
             <div className="flex flex-col w-full md:w-2/5 justify-center items-center gap-5">
               <Link
-                href={"/learn/cairo/intro"}
+                href={"/learn/cairo/content"}
                 className="bg-black text-white rounded-md w-[150px] py-6 text-center hover:bg-slate-900 duration-150"
               >
                 Get started
@@ -78,7 +80,12 @@ export default function Cairo() {
                 <h1 className="font-bold text-xl">What you will learn</h1>
                 <p className="text-base">This course have 40 lessons</p>
               </div>
-              <Button className="font-bold">Get Started</Button>
+              <Link
+                href={"/learn/cairo/content"}
+                className="bg-black text-white rounded-md w-[150px] py-6 text-center hover:bg-slate-900 duration-150"
+              >
+                Get started
+              </Link>
             </div>
 
             <div className="flex flex-col">
@@ -95,7 +102,7 @@ export default function Cairo() {
                           <p className="text-lg font-bold">{item.title}</p>
                           <div className="flex flex-col gap-2 text-sm font-light">
                             <p>14 lessons</p>
-                            <p>1 hour 1min</p>
+                            <p>{totalCourse}</p>
                           </div>
                         </div>
                       </AccordionTrigger>
@@ -104,7 +111,7 @@ export default function Cairo() {
                           {item.contents.map((content) => {
                             return (
                               <Link
-                                href={"/"}
+                                href={"/learn/cairo/content"}
                                 key={content.id}
                                 className="flex flex-row justify-between items-center px-2 py-4"
                               >
