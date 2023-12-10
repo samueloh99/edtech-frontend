@@ -11,7 +11,7 @@ export function LearnHeader() {
     <div className="flex flex-row justify-between items-center md:px-10 px-5 h-[50px] bg-black text-white w-full">
       <ul className="hidden md:flex flex-row justify-center items-center gap-2 text-sm">
         <Link href={"/"} className="font-bold">
-          Education Platform
+          Code Space
         </Link>
         <li>/</li>
         {breadcrumbs.map((link, index) => (
@@ -22,15 +22,9 @@ export function LearnHeader() {
       </ul>
       <ul className="flex md:hidden flex-row justify-center items-center gap-2 text-sm">
         <Link href={"/"} className="font-bold">
-          Education Platform
+          Code Space
         </Link>
       </ul>
-      <div className="flex flex-row justify-center items-center gap-10 text-sm">
-        <p>Get a plan</p>
-        <div>
-          <User size={20} />
-        </div>
-      </div>
     </div>
   );
 }
