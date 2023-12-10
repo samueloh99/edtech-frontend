@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import { cn } from "@/lib/utils";
 import "./globals.css";
+import { ClerkProvider } from "@clerk/nextjs";
 
 const fontsPoppins = Poppins({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800"],
@@ -21,15 +22,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body
-        className={cn(
-          "min-h-screen font-sans antialiased",
-          fontsPoppins.variable
-        )}
-      >
-        {children}
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="en">
+        <body
+          className={cn(
+            "min-h-screen font-sans antialiased",
+            fontsPoppins.variable
+          )}
+        >
+          {children}
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

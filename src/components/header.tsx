@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { UserButton } from "@clerk/nextjs";
+import { UserActionHeader } from "./useractionheader";
 
 export function Header() {
   return (
@@ -7,6 +9,9 @@ export function Header() {
         <Link href={"/"} className="text-xl font-bold">
           Code Space
         </Link>
+        <ul className="flex flex-row justify-center items-center gap-5 text-lg">
+          <UserActionHeader />
+        </ul>
       </div>
     </div>
   );
