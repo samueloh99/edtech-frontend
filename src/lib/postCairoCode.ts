@@ -1,4 +1,4 @@
-import { PostCairoCodeSubmissionType } from "./types";
+import { PostCodeSubmissionType } from "./types";
 
 class ApiError extends Error {
   statusCode: number;
@@ -12,7 +12,7 @@ class ApiError extends Error {
 export async function postCairoCodeSubmission(
   userCode: string,
   exerciseId: number
-): Promise<PostCairoCodeSubmissionType> {
+): Promise<PostCodeSubmissionType> {
   const body = {
     userCode,
     exerciseId: String(exerciseId),
